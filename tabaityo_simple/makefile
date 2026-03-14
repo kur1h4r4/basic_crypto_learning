@@ -1,12 +1,15 @@
-CXX := g++
+CXX      := g++
 CXXFLAGS := -std=c++20 -O2 -Wall -Wextra -pedantic
-TARGET := tabaityo_simple
-SRC := tabaityo_simple.cpp
+TARGET   := tabaityo_simple
+SRC      := main.cpp
+# 依存するすべてのヘッダーファイルをリストアップ
+HEADERS  := bignum.hpp rsa_utils.hpp rsa_ops.hpp
 
 all: $(TARGET)
 
-$(TARGET): $(SRC)
-	$(CXX) $(CXXFLAGS) -o $@ $^
+# $^ は依存ファイル($(SRC) $(HEADERS))、$@ はターゲット名($(TARGET))を指します
+$(TARGET): $(SRC) $(HEADERS)
+	$(CXX) $(CXXFLAGS) -o $@ $(SRC)
 
 clean:
 	rm -f $(TARGET)

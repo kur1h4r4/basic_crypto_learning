@@ -1,12 +1,16 @@
-CXX := g++
+CXX      := g++
 CXXFLAGS := -std=c++20 -O2 -Wall -Wextra -pedantic
-TARGET := tabaityo_ecc
-SRC := tabaityo_ecc.cpp
+TARGET   := tabaityo_ecdsa_sign_verify
+
+# ソースファイルとヘッダーファイルの定義
+SRC      := main.cpp
+HEADERS  := bignum.hpp rsa_utils.hpp ecdsa_ops.hpp
 
 all: $(TARGET)
 
-$(TARGET): $(SRC)
-	$(CXX) $(CXXFLAGS) -o $@ $^
+# TARGETはSRCとすべてのHEADERSに依存する
+$(TARGET): $(SRC) $(HEADERS)
+	$(CXX) $(CXXFLAGS) -o $@ $(SRC)
 
 clean:
 	rm -f $(TARGET)
